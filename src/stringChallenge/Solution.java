@@ -19,27 +19,24 @@ public class Solution {
 
         StringBuilder numList = new StringBuilder();
 
-        for (int i = 0; i < numInts.length; i++) {
+        for (int i = 0; i < numInts.length - 1; i++) {
             numList.append(numInts[i]);
 
-            if (i != numInts.length - 1
-                    && numInts[i] % 2 == 0
-                    && numInts[i + 1] % 2 == 0
+            int result = numInts[i] % 2 + numInts[i + 1] % 2;
+
+            if (result==0
                     && numInts[i] != 0
                     && numInts[i + 1] != 0) {
                 numList.append("*");
             }
 
-            if (i != numInts.length - 1
-                    && numInts[i] % 2 == 1
-                    && numInts[i + 1] % 2 == 1
+            if (result==2
                     && numInts[i] != 0
-                    && numInts[i + 1] != 0
-                    && i != numInts.length - 1) {
+                    && numInts[i + 1] != 0) {
                 numList.append("-");
             }
-
         }
+        numList.append(numInts[numInts.length - 1]);
         return numList.toString();
     }
 
