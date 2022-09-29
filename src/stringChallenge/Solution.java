@@ -25,11 +25,20 @@ public class Solution {
             int result = numInts[i] % 2 + numInts[i + 1] % 2;
 
             if (numInts[i] != 0 && numInts[i + 1] != 0) {
-                if (result == 0) {
-                    numList.append("*");
-                } else if (result == 2) {
-                    numList.append("-");
+
+                switch (result){
+                    case 0:
+                        numList.append("*");
+                        break;
+                    case 2:
+                        numList.append("-");
+                        break;
                 }
+//                if (result == 0) {
+//                    numList.append("*");
+//                } else if (result == 2) {
+//                    numList.append("-");
+//                }
 
             }
         }
