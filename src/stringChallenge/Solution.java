@@ -22,24 +22,11 @@ public class Solution {
         for (int i = 0; i < numInts.length - 1; i++) {
             numList.append(numInts[i]);
 
-            int result = numInts[i] % 2 + numInts[i + 1] % 2;
+            if (numInts[i] % 2 == numInts[i + 1] % 2
+                    && numInts[i] != 0 && numInts[i + 1] != 0) {
 
-            if (numInts[i] != 0 && numInts[i + 1] != 0) {
-
-                switch (result){
-                    case 0:
-                        numList.append("*");
-                        break;
-                    case 2:
-                        numList.append("-");
-                        break;
-                }
-//                if (result == 0) {
-//                    numList.append("*");
-//                } else if (result == 2) {
-//                    numList.append("-");
-//                }
-
+                String addSymbol = numInts[i] % 2 == 0 ? "*" : "-";
+                numList.append(addSymbol);
             }
         }
         numList.append(numInts[numInts.length - 1]);
