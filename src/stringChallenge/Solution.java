@@ -23,7 +23,8 @@ public class Solution {
             numList.append(numInts[i]);
 
             if (numInts[i] % 2 == numInts[i + 1] % 2
-                    && numInts[i] != 0 && numInts[i + 1] != 0) {
+                    && numInts[i] != 0
+                    && numInts[i + 1] != 0) {
 
                 String addSymbol = numInts[i] % 2 == 0 ? "*" : "-";
                 numList.append(addSymbol);
