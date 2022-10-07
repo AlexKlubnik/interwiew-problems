@@ -2,7 +2,7 @@ package arrayChallenge;
 
 import java.util.*;
 
-public class Solution {
+public class ArrayChallengeSolution {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -14,25 +14,25 @@ public class Solution {
     }
 
     public static int ArrayChallenge(int[] array) {
-        Map<Integer, Integer> temp = new HashMap<>();
+        Map<Integer, Integer> temp = new LinkedHashMap<>();
         int valueOfMaxRepeats = array[0];
         int maxRepeats = 0;
 
         for (Integer num : array) {
 
-            if (temp.containsKey(num)) {
-                int tempRepeater = temp.get(num) + 1;
-                temp.put(num, tempRepeater);
-                if (tempRepeater >= maxRepeats) {
-                    maxRepeats = tempRepeater;
-                    valueOfMaxRepeats = num;
-                }
-            } else {
-                temp.put(num, 1);
+            int tempRepeater = temp.getOrDefault(num, 0) + 1;
+
+            temp.put(num, tempRepeater);
+
+            if (tempRepeater > maxRepeats) {
+                maxRepeats = tempRepeater;
+                valueOfMaxRepeats = num;
+
             }
         }
+
         System.out.println(temp);
-        if (maxRepeats == 0)
+        if (maxRepeats == 1)
             return -1;
         else return valueOfMaxRepeats;
     }
