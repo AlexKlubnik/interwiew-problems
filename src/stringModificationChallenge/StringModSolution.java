@@ -3,27 +3,25 @@ package stringModificationChallenge;
 public class StringModSolution {
     public static void main(String[] args) {
         String str1 = "abc";
-        String str2 = "abc";
+        String str2 = "abcd";
         System.out.println(isOneModification(str1, str2));
     }
 
     private static boolean isOneModification(String string1, String string2) {
 
         int lengthSubtraction = Math.abs(string1.length() - string2.length());
-        boolean result=false;
+        boolean result;
 
         if (lengthSubtraction > 1) {
             return false;
-
-        } else if (lengthSubtraction == 0) {
+        }
+        if (lengthSubtraction == 0) {
             result = countDiffSymbols(string1, string2) <= 1;
 
         } else {
             String smallString = getSmallestString(string1, string2);
             String bigString = getBiggestString(string1, string2);
-            if (countSimilarSymbols(smallString, bigString) == smallString.length()
-                    || countSimilarSymbols(smallString, bigString) == smallString.length()+1)
-                result = true;
+            result = countDiffSymbols2(smallString, bigString) == 1;
         }
         return result;
     }
@@ -39,33 +37,34 @@ public class StringModSolution {
     private static int countDiffSymbols(String string1, String string2) {
         char[] charArr1 = string1.toCharArray();
         char[] charArr2 = string2.toCharArray();
-        int modifyCounter = 0;
+        int diffSymbolCounter = 0;
 
         for (int i = 0; i < string1.length(); i++) {
             if (charArr1[i] != charArr2[i]) {
-                modifyCounter++;
+                diffSymbolCounter++;
             }
-            if (modifyCounter > 1)
+            if (diffSymbolCounter > 1)
                 break;
         }
-        return modifyCounter;
+        return diffSymbolCounter;
     }
 
-    private static int countSimilarSymbols(String smallString, String bigString) {
-        int similarSymbolCounter = 0;
+    private static int countDiffSymbols2(String smallString, String bigString) {
+        int diffSymbolCounter = 0;
         char[] smallArray = smallString.toCharArray();
         char[] bigArray = bigString.toCharArray();
+        int smallArrayPos = 0;
 
-        for (int i = 0; i < smallArray.length; i++) {
-            for (int j = i; j < bigArray.length; j++) {
-                if (smallArray[i] == bigArray[j]) {
-                    similarSymbolCounter++;
-                }
-                if (similarSymbolCounter > smallArray.length) {
-                    break;
-                }
-            }
+        for (char c : bigArray) {
+            if (c == smallArray[smallArrayPos]) {
+                if (smallArrayPos < smallArray.length - 1)
+                    smallArrayPos++;
+            } else
+                diffSymbolCounter++;
+
+            if (diffSymbolCounter > 1)
+                break;
         }
-        return similarSymbolCounter;
+        return diffSymbolCounter;
     }
 }
